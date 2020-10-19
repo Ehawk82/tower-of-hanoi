@@ -1,0 +1,59 @@
+/*DOM*/
+
+html,body {
+    margin:0;
+    padding:0;
+    background-color: silver;
+}
+
+table {
+	height: 95vh;
+}
+
+td {
+	transform: rotate(180deg) scaleX(-1);
+	width:33%;
+}
+
+/*CLASS*/
+
+.statBar {
+	height: 5vh;
+}
+
+.item {
+	background-color: red;
+	margin:auto;
+	z-index: 1;
+	position: relative;
+}
+
+.rod {
+	background-color: darkgrey;
+	width: 2vw;
+	height: 40vh;
+	margin:auto calc(-1vw);
+	position: absolute;
+    display: inline-block;
+    z-index: 0;
+}
+/*ID*/
+
+/*MULTIS*/
+
+table, .statBar {
+	background-color: white;
+}
+
+td, .statBar,.item {
+	box-shadow: 0 0 1px black,0 0 1px black,0 0 1px black,0 0 1px black;
+}
+
+.statBar, table {
+	width:100vw;
+}
+
+.statBar, table, td {
+	text-align: center;
+}
+/*MEDIA-QUERIES*/
