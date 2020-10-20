@@ -66,7 +66,9 @@ table {
 td, .statBar {
 	background-color: white;
 }
-
+.item {
+	transition: 100ms all;
+}
 .statBar,.item {
 	box-shadow: 0 0 1px black,0 0 1px black,0 0 1px black,0 0 1px black;
 }
