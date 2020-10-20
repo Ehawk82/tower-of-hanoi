@@ -29,15 +29,14 @@ const runApp = () => {
 				item.setAttribute("data-index",slots[i][k]);
 				item.className = "item";
 				item.innerHTML = "&nbsp;";
-
 				item.style.width = w + "%";
 
 				td.append(item);
 			}
-			console.log(slots[i][k]);
 		}
 
-		table.append(td); 
+		table.append(td);
+		trackTable(td,slots);
 	}
 
 	statBar.className = "statBar";
@@ -46,8 +45,56 @@ const runApp = () => {
 	body.append(statBar,table);
 };
 
-const trackTable = (item) => {
-	console.log(item);
+const trackTable = (td,slots) => {
+	const lc = td.lastChild;
+	if(lc.className === "item"){
+		lc.style.cursor = "grab";
+		lc.onclick = (e) => pickupItem(td,lc,e);
+	}
 };
 
+const tdClicked = (td) => {
+	return function(){
+		var bodyChildren = body.childNodes; 
+		console.log(bodyChildren);
+	}
+};
+
+const pickupItem = (td,lc,e) => {
+	lc.style.display = "none";
+	followCursor.init(lc,e);
+  	document.body.onmousemove = followCursor.run;
+}
+
+var followCursor = (function() {
+  var s = document.createElement('div');
+
+  s.className = "item";
+  s.innerHTML = "&nbsp;";
+  s.style.position = 'absolute';
+  s.style.border = '1px solid red';
+
+  return {
+    init: function(lc,e) {
+    	var lcw = lc.style.width,
+    		plcw = lcw.split("%"),
+    		nplcw = plcw[0] * 4;
+ 
+      	s.style.width = nplcw + "px";
+      	s.style.left  = (e.clientX + 15) + 'px';
+      	s.style.top = (e.clientY + 15) + 'px';
+
+      	document.body.appendChild(s);
+    },
+
+    run: function(e) {
+      var e = e || window.event;
+      s.style.left  = (e.clientX + 15) + 'px';
+      s.style.top = (e.clientY + 15) + 'px';
+
+    }
+  };
+}());
+
 window.onload = () => { init() };
+
