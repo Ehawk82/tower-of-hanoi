@@ -68,13 +68,17 @@ button {
 	top:0;
 	width: 100vw;
 	height: 100vh;
-	line-height: 10vh;
+	line-height: 12vh;
 	background-color: white;
 	text-align: center;
 }
 /*ID*/
 
 /*MULTIS*/
+html,body,button {
+   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+   font-weight: 300;
+}
 table {
 	border:2px solid black;
 }

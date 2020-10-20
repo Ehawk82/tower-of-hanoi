@@ -112,6 +112,14 @@ const pickupItem = (lc,e) => {
   	deleteThis(lc);
 	setTimeout(() => {
 		for (var t = 0; t < tds.length; t++) {
+			var tdsCN = tds[t].childNodes;
+
+			for (var z = 0; z < tdsCN.length; z++) {
+				if(tdsCN[z].className === "item"){
+					tdsCN[z].onclick = null;
+				};
+			}
+
 			var tdsLC = tds[t].lastChild,
 				tdsWidth = tdsLC.style.width.split("%"),
 				tdBool;
