@@ -24,14 +24,17 @@ const runApp = () => {
 
 				let w;
 
-				w = 50 / slots[i][k];
+				w = 50 / (slots[i][k] / 1.5);
 
+				item.setAttribute("data-index",slots[i][k]);
 				item.className = "item";
 				item.innerHTML = "&nbsp;";
+
 				item.style.width = w + "%";
 
 				td.append(item);
 			}
+			console.log(slots[i][k]);
 		}
 
 		table.append(td); 
@@ -41,6 +44,10 @@ const runApp = () => {
 	statBar.innerHTML = "Moves: " + moves;
 
 	body.append(statBar,table);
+};
+
+const trackTable = (item) => {
+	console.log(item);
 };
 
 window.onload = () => { init() };
