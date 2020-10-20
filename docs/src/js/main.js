@@ -39,7 +39,7 @@ const runApp = () => {
 	}
 
 	statBar.className = "statBar";
-	statBar.innerHTML = "Moves: " + moves;
+	statBar.innerHTML = "MOVES: " + moves;
 
 	body.append(statBar,table);
 };
@@ -64,6 +64,7 @@ const trackTable = (td,slots) => {
 
 const tdClicked = (tds,t) => {
 	return function(){
+		moves++;
 		var bodyChildren = body.childNodes;
 		for (var c = 0; c < bodyChildren.length; c++) {
 			if(bodyChildren[c].className === "item"){
@@ -91,7 +92,15 @@ const tdClicked = (tds,t) => {
 			tds[d].onclick = null;
 			trackTable(tds[d],slots);
 		}
+		var statBar = bySel(".statBar");
+		statBar.innerHTML = "MOVES: " + moves;
+        var winSlotChild = tds[2].childNodes;
+
+		if(winSlotChild.length === 5){
+			runWinAlert(moves);
+		};
 	}
+
 };
 
 const pickupItem = (lc,e) => {
@@ -100,16 +109,38 @@ const pickupItem = (lc,e) => {
 	
 	followCursor.init(lc,e);
   	document.body.onmousemove = followCursor.run;
+  	deleteThis(lc);
 	setTimeout(() => {
 		for (var t = 0; t < tds.length; t++) {
-			var tdsCN = tds[t].childNodes;
-			
-			
+			var tdsLC = tds[t].lastChild,
+				tdsWidth = tdsLC.style.width.split("%"),
+				tdBool;
+			if(tdsWidth[0]){
+				var bdyItems = byTag("body",0).childNodes;
+
+				for (var j = 0; j < bdyItems.length; j++) {
+					if(bdyItems[j].className === "item"){
+						var itemWidth = bdyItems[j].style.width.split("%"),
+							itemWadjust = itemWidth[0] * 3;
+						//console.log(itemWadjust);
+						//console.log(tdsWidth[0]);
+						if (tdsWidth[0] < itemWadjust) {
+							tdBool = null;
+						} else {
+							tdBool = tdClicked(tds,t);
+
+						}
+					}
+				}
+//				console.log(bdyItems);
+				//tdBool = null;
+			} else {
+				tdBool = tdClicked(tds,t);
+			};
 			//todo: filter td onlick as null when 'lc' width is higher than the lastChild of each 'td'
 			
+			tds[t].onclick = tdBool;
 			
-			tds[t].onclick = tdClicked(tds,t);
-			deleteThis(lc);
 		}
 	}, 100);
   	
@@ -145,5 +176,28 @@ var followCursor = (function() {
   };
 }());
 
+const runWinAlert = (moves) => {
+	var winPage = createEle("div"),
+		winMsg = createEle("h1"),
+		winData = createEle("p"),
+		newBtn = createEle("button"),
+		pBool = "";
+
+	winMsg.innerHTML = "YOU WON THE GAME!";
+
+if (moves === 15) {
+	pBool = "PERFECT SCORE!";
+}
+
+	winData.innerHTML = "MOVES: " + moves + "<br />" + pBool;
+
+	newBtn.innerHTML = "RESTART!";
+	newBtn.onclick = () => location.reload();
+
+	winPage.className = "winPage";
+	winPage.append(winMsg,winData,newBtn);
+
+	body.append(winPage);
+};
 window.onload = () => { init() };
 

@@ -4,6 +4,7 @@ html,body {
     margin:0;
     padding:0;
     background-color: silver;
+    font-size:2em;
 }
 
 table {
@@ -14,17 +15,20 @@ td {
 	transform: rotate(180deg) scaleX(-1);
 	width:33%;
 }
-
+button {
+	font-size:2em;
+}
 /*CLASS*/
 
 .statBar {
 	height: 5vh;
+	font-size:3vh;
 }
 
 .item {
 	margin:auto;
 	border-radius: 10px;
-	height: 8vh;
+
 	z-index: 1;
 	position: relative;
 	
@@ -57,6 +61,17 @@ td {
 	background: linear-gradient(to right, rgba(76,76,76,1) 0%, rgba(89,89,89,1) 20%, rgba(102,102,102,1) 25%, rgba(71,71,71,1) 31%, rgba(44,44,44,1) 46%, rgba(0,0,0,1) 55%, rgba(17,17,17,1) 60%, rgba(43,43,43,1) 76%, rgba(89,89,89,1) 88%, rgba(28,28,28,1) 91%, rgba(19,19,19,1) 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', endColorstr='#131313', GradientType=1 );
 }
+
+.winPage {
+	position: fixed;
+	left: 0;
+	top:0;
+	width: 100vw;
+	height: 100vh;
+	line-height: 10vh;
+	background-color: white;
+	text-align: center;
+}
 /*ID*/
 
 /*MULTIS*/
@@ -81,3 +96,41 @@ td, .statBar {
 	text-align: center;
 }
 /*MEDIA-QUERIES*/
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+	.item {
+		height: 2vh;
+	}
+
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+	.item {
+		height: 3vh;
+	}
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {.
+	.item {
+		height: 4vh;
+	}
+
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+	.item {
+		height: 6vh;
+	}
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+	.item {
+		height: 8vh;
+	}
+}

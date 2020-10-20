@@ -3,4 +3,4 @@ const slotTemplate = [
 	[0,0,0,0],
 	[0,0,0,0]
 ];
-const moves = 0;
+let moves = 0;
